@@ -32394,12 +32394,151 @@ export type _Service = {
   sdl?: Maybe<Scalars['String']['output']>;
 };
 
+export type ProductByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ProductByIdQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, description?: any | null, media?: Array<{ __typename?: 'ProductMedia', url: string }> | null, category?: { __typename?: 'Category', name: string } | null, variants?: Array<{ __typename?: 'ProductVariant', id: string, name: string }> | null } | null };
+
+export type ProductFilterByNameQueryVariables = Exact<{
+  filter: ProductFilterInput;
+  sortBy?: InputMaybe<ProductOrder>;
+  after?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type ProductFilterByNameQuery = { __typename?: 'Query', products?: { __typename?: 'ProductCountableConnection', totalCount?: number | null, edges: Array<{ __typename?: 'ProductCountableEdge', node: { __typename?: 'Product', id: string, name: string, thumbnail?: { __typename?: 'Image', url: string } | null, category?: { __typename?: 'Category', name: string } | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null, endCursor?: string | null } } | null };
+
 export type ProductGetThreeElementsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ProductGetThreeElementsQuery = { __typename?: 'Query', products?: { __typename?: 'ProductCountableConnection', edges: Array<{ __typename?: 'ProductCountableEdge', node: { __typename?: 'Product', id: string, name: string } }> } | null };
 
+export type ProductGetTwelveElementsQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type ProductGetTwelveElementsQuery = { __typename?: 'Query', products?: { __typename?: 'ProductCountableConnection', edges: Array<{ __typename?: 'ProductCountableEdge', node: { __typename?: 'Product', id: string, name: string, thumbnail?: { __typename?: 'Image', url: string } | null, category?: { __typename?: 'Category', name: string } | null } }> } | null };
+
+
+export const ProductByIdDocument = gql`
+    query ProductByID($id: ID!) {
+  product(id: $id, channel: "default-channel") {
+    id
+    name
+    description
+    media {
+      url
+    }
+    category {
+      name
+    }
+    variants {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useProductByIdQuery__
+ *
+ * To run a query within a React component, call `useProductByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProductByIdQuery(baseOptions: Apollo.QueryHookOptions<ProductByIdQuery, ProductByIdQueryVariables> & ({ variables: ProductByIdQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductByIdQuery, ProductByIdQueryVariables>(ProductByIdDocument, options);
+      }
+export function useProductByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductByIdQuery, ProductByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductByIdQuery, ProductByIdQueryVariables>(ProductByIdDocument, options);
+        }
+export function useProductByIdSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ProductByIdQuery, ProductByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ProductByIdQuery, ProductByIdQueryVariables>(ProductByIdDocument, options);
+        }
+export type ProductByIdQueryHookResult = ReturnType<typeof useProductByIdQuery>;
+export type ProductByIdLazyQueryHookResult = ReturnType<typeof useProductByIdLazyQuery>;
+export type ProductByIdSuspenseQueryHookResult = ReturnType<typeof useProductByIdSuspenseQuery>;
+export type ProductByIdQueryResult = Apollo.QueryResult<ProductByIdQuery, ProductByIdQueryVariables>;
+export const ProductFilterByNameDocument = gql`
+    query ProductFilterByName($filter: ProductFilterInput!, $sortBy: ProductOrder, $after: String) {
+  products(
+    first: 4
+    channel: "default-channel"
+    filter: $filter
+    sortBy: $sortBy
+    after: $after
+  ) {
+    edges {
+      node {
+        id
+        name
+        thumbnail {
+          url
+        }
+        category {
+          name
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    totalCount
+  }
+}
+    `;
+
+/**
+ * __useProductFilterByNameQuery__
+ *
+ * To run a query within a React component, call `useProductFilterByNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductFilterByNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductFilterByNameQuery({
+ *   variables: {
+ *      filter: // value for 'filter'
+ *      sortBy: // value for 'sortBy'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useProductFilterByNameQuery(baseOptions: Apollo.QueryHookOptions<ProductFilterByNameQuery, ProductFilterByNameQueryVariables> & ({ variables: ProductFilterByNameQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>(ProductFilterByNameDocument, options);
+      }
+export function useProductFilterByNameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>(ProductFilterByNameDocument, options);
+        }
+export function useProductFilterByNameSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>(ProductFilterByNameDocument, options);
+        }
+export type ProductFilterByNameQueryHookResult = ReturnType<typeof useProductFilterByNameQuery>;
+export type ProductFilterByNameLazyQueryHookResult = ReturnType<typeof useProductFilterByNameLazyQuery>;
+export type ProductFilterByNameSuspenseQueryHookResult = ReturnType<typeof useProductFilterByNameSuspenseQuery>;
+export type ProductFilterByNameQueryResult = Apollo.QueryResult<ProductFilterByNameQuery, ProductFilterByNameQueryVariables>;
 export const ProductGetThreeElementsDocument = gql`
     query ProductGetThreeElements {
   products(first: 3, channel: "default-channel") {
@@ -32444,6 +32583,56 @@ export type ProductGetThreeElementsQueryHookResult = ReturnType<typeof useProduc
 export type ProductGetThreeElementsLazyQueryHookResult = ReturnType<typeof useProductGetThreeElementsLazyQuery>;
 export type ProductGetThreeElementsSuspenseQueryHookResult = ReturnType<typeof useProductGetThreeElementsSuspenseQuery>;
 export type ProductGetThreeElementsQueryResult = Apollo.QueryResult<ProductGetThreeElementsQuery, ProductGetThreeElementsQueryVariables>;
+export const ProductGetTwelveElementsDocument = gql`
+    query ProductGetTwelveElements {
+  products(first: 12, channel: "default-channel") {
+    edges {
+      node {
+        id
+        name
+        thumbnail {
+          url
+        }
+        category {
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProductGetTwelveElementsQuery__
+ *
+ * To run a query within a React component, call `useProductGetTwelveElementsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductGetTwelveElementsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductGetTwelveElementsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProductGetTwelveElementsQuery(baseOptions?: Apollo.QueryHookOptions<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>(ProductGetTwelveElementsDocument, options);
+      }
+export function useProductGetTwelveElementsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>(ProductGetTwelveElementsDocument, options);
+        }
+export function useProductGetTwelveElementsSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>(ProductGetTwelveElementsDocument, options);
+        }
+export type ProductGetTwelveElementsQueryHookResult = ReturnType<typeof useProductGetTwelveElementsQuery>;
+export type ProductGetTwelveElementsLazyQueryHookResult = ReturnType<typeof useProductGetTwelveElementsLazyQuery>;
+export type ProductGetTwelveElementsSuspenseQueryHookResult = ReturnType<typeof useProductGetTwelveElementsSuspenseQuery>;
+export type ProductGetTwelveElementsQueryResult = Apollo.QueryResult<ProductGetTwelveElementsQuery, ProductGetTwelveElementsQueryVariables>;
 export type AccountAddressCreateKeySpecifier = ('accountErrors' | 'address' | 'errors' | 'user' | AccountAddressCreateKeySpecifier)[];
 export type AccountAddressCreateFieldPolicy = {
 	accountErrors?: FieldPolicy<any> | FieldReadFunction<any>,

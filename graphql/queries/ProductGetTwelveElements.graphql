@@ -1,0 +1,17 @@
+# graphql/queries/ProductGetTwelveElements.graphql
+query ProductGetTwelveElements {
+  products(first: 12, channel: "default-channel") {
+    edges {
+      node {
+        id
+        name
+        thumbnail {
+          url
+        }
+        category {
+          name
+        }
+      }
+    }
+  }
+}
